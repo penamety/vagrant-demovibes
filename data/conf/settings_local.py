@@ -59,7 +59,7 @@ EMAIL_HOST = "localhost"
 DEFAULT_FROM_EMAIL = "noreply@localhost"
 FILE_UPLOAD_PERMISSIONS = 0644
 
-DEMOSAUCE_SCAN = "/home/vagrant/src/demosauce/dscan"
+DEMOSAUCE_SCAN = "/home/vagrant/src/demosauce/scan"
 
 ADMIN_NOTIFY_ON_NEW_USER = 0
 USER_SEND_CONF_OK = 1

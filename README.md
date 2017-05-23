@@ -22,7 +22,7 @@ icecast is at: http://localhost:8000/ (this is not where nectarine/demovibes web
 
 username/pass: admin/admin
 
-Acknowledements
-===============
+Acknowledgements
+================
 
 Includes code from http://jplayer.org under the mit license (see data/player/MIT-LICENSE.txt for details)

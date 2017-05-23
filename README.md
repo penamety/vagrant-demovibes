@@ -1,6 +1,5 @@
 Usage:
 - git checkout
-- put some mp3's in media/music/
 
 run:
 - init.sh

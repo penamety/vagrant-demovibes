@@ -24,5 +24,5 @@ username/pass: admin/admin
 
 Acknowledgements
 ================
-
 Includes code from http://jplayer.org under the mit license (see data/player/MIT-LICENSE.txt for details)
+Includes song 'Bootup' from Amiga game 'Lotus Turbo Challenge 2' by Barry Leitch (see ```http://modarchive.org/index.php?request=view_by_moduleid&query=83892```)

@@ -210,7 +210,7 @@ CREATE TABLE `django_admin_log` (
   KEY `django_admin_log_e4470c6e` (`content_type_id`),
   CONSTRAINT `content_type_id_refs_id_288599e6` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
   CONSTRAINT `user_id_refs_id_c8665aa` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -219,7 +219,7 @@ CREATE TABLE `django_admin_log` (
 
 LOCK TABLES `django_admin_log` WRITE;
 /*!40000 ALTER TABLE `django_admin_log` DISABLE KEYS */;
-INSERT INTO `django_admin_log` VALUES (1,'2017-05-23 19:16:06',1,19,'1','admin',1,''),(2,'2017-05-23 19:16:15',1,19,'1','admin',2,'Changed country.'),(3,'2017-05-23 19:18:16',1,19,'2','djrandom',2,'Changed email_on_artist_add, email_on_artist_comment, email_on_group_add, email_on_pm, paginate_favorites, pm_accepted_upload, show_screenshots, show_youtube, use_tags and visible_to.');
+INSERT INTO `django_admin_log` VALUES (1,'2017-05-23 19:16:06',1,19,'1','admin',1,''),(2,'2017-05-23 19:16:15',1,19,'1','admin',2,'Changed country.'),(3,'2017-05-23 19:18:16',1,19,'2','djrandom',2,'Changed email_on_artist_add, email_on_artist_comment, email_on_group_add, email_on_pm, paginate_favorites, pm_accepted_upload, show_screenshots, show_youtube, use_tags and visible_to.'),(4,'2017-05-23 19:57:10',1,21,'1','Barry Leitch',1,'');
 /*!40000 ALTER TABLE `django_admin_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -677,7 +677,7 @@ CREATE TABLE `webview_ajaxevent` (
   PRIMARY KEY (`id`),
   KEY `webview_ajaxevent_fbfc09f1` (`user_id`),
   CONSTRAINT `user_id_refs_id_1e7fd7c3` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -686,6 +686,7 @@ CREATE TABLE `webview_ajaxevent` (
 
 LOCK TABLES `webview_ajaxevent` WRITE;
 /*!40000 ALTER TABLE `webview_ajaxevent` DISABLE KEYS */;
+INSERT INTO `webview_ajaxevent` VALUES (1,1,'msg:{\"category\": 0, \"message\": \"Bootup has been queued. It is expected to play at <span class=\'tzinfo\'>19:57</span>.\"}'),(NULL,2,'a_queue_1'),(NULL,3,'queue');
 /*!40000 ALTER TABLE `webview_ajaxevent` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -703,20 +704,20 @@ CREATE TABLE `webview_artist` (
   `name` varchar(64) NOT NULL,
   `webpage` varchar(200) NOT NULL,
   `dob` date DEFAULT NULL,
-  `alias_of_id` int(11),
+  `alias_of_id` int(11) DEFAULT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `link_to_user_id` int(11),
+  `link_to_user_id` int(11) DEFAULT NULL,
   `status` varchar(1) NOT NULL,
-  `artist_pic` varchar(100),
-  `created_by_id` int(11),
-  `last_updated` datetime,
+  `artist_pic` varchar(100) DEFAULT NULL,
+  `created_by_id` int(11) DEFAULT NULL,
+  `last_updated` datetime DEFAULT NULL,
   `last_fm_id` varchar(32) NOT NULL,
   `home_location` varchar(40) NOT NULL,
   `home_country` varchar(10) NOT NULL,
   `wiki_link` varchar(200) NOT NULL,
-  `hol_id` int(11),
+  `hol_id` int(11) DEFAULT NULL,
   `is_deceased` tinyint(1) NOT NULL,
-  `deceased_date` date,
+  `deceased_date` date DEFAULT NULL,
   `twitter_id` varchar(32) NOT NULL,
   `scene_relevance` longtext NOT NULL,
   PRIMARY KEY (`id`),
@@ -729,7 +730,7 @@ CREATE TABLE `webview_artist` (
   CONSTRAINT `alias_of_id_refs_id_585836d` FOREIGN KEY (`alias_of_id`) REFERENCES `webview_artist` (`id`),
   CONSTRAINT `created_by_id_refs_id_66b30201` FOREIGN KEY (`created_by_id`) REFERENCES `auth_user` (`id`),
   CONSTRAINT `link_to_user_id_refs_id_66b30201` FOREIGN KEY (`link_to_user_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -738,6 +739,7 @@ CREATE TABLE `webview_artist` (
 
 LOCK TABLES `webview_artist` WRITE;
 /*!40000 ALTER TABLE `webview_artist` DISABLE KEYS */;
+INSERT INTO `webview_artist` VALUES ('','b','Barry Leitch','','',NULL,NULL,1,NULL,'A','',NULL,'2017-05-23 19:57:10','','','','',NULL,0,NULL,'','');
 /*!40000 ALTER TABLE `webview_artist` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -838,30 +840,30 @@ DROP TABLE IF EXISTS `webview_compilation`;
 CREATE TABLE `webview_compilation` (
   `info` longtext NOT NULL,
   `purchase_page` varchar(200) NOT NULL,
-  `cover_art` varchar(100),
+  `cover_art` varchar(100) DEFAULT NULL,
   `name` varchar(80) NOT NULL,
   `startswith` varchar(1) NOT NULL,
   `label` varchar(30) NOT NULL,
-  `rel_date` date,
+  `rel_date` date DEFAULT NULL,
   `details_page` varchar(200) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `num_discs` int(11) DEFAULT NULL,
   `running_time` int(11) DEFAULT NULL,
   `date_added` datetime NOT NULL,
   `status` varchar(1) NOT NULL,
-  `created_by_id` int(11),
+  `created_by_id` int(11) DEFAULT NULL,
   `media_format` varchar(30) NOT NULL,
-  `pouet` int(11),
+  `pouet` int(11) DEFAULT NULL,
   `bar_code` varchar(30) NOT NULL,
   `youtube_link` varchar(200) NOT NULL,
   `prod_notes` longtext NOT NULL,
   `download_link` varchar(200) NOT NULL,
-  `last_updated` datetime,
+  `last_updated` datetime DEFAULT NULL,
   `wiki_link` varchar(200) NOT NULL,
-  `zxdemo_id` int(11),
-  `projecttwosix_id` int(11),
-  `hol_id` int(11),
-  `comp_icon` varchar(100),
+  `zxdemo_id` int(11) DEFAULT NULL,
+  `projecttwosix_id` int(11) DEFAULT NULL,
+  `hol_id` int(11) DEFAULT NULL,
+  `comp_icon` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`),
   KEY `webview_compilation_df90be6` (`startswith`),
@@ -1028,7 +1030,7 @@ DROP TABLE IF EXISTS `webview_faq`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `webview_faq` (
   `added` datetime NOT NULL,
-  `last_updated` datetime,
+  `last_updated` datetime DEFAULT NULL,
   `question` varchar(500) NOT NULL,
   `priority` int(11) DEFAULT NULL,
   `active` tinyint(1) NOT NULL,
@@ -1127,7 +1129,7 @@ CREATE TABLE `webview_genericlink` (
   `value` varchar(80) NOT NULL,
   `status` int(10) unsigned NOT NULL,
   `comment` longtext NOT NULL,
-  `user_id` int(11),
+  `user_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `webview_genericlink_e4470c6e` (`content_type_id`),
   KEY `webview_genericlink_f44c31a0` (`link_id`),
@@ -1159,17 +1161,17 @@ DROP TABLE IF EXISTS `webview_group`;
 CREATE TABLE `webview_group` (
   `info` longtext NOT NULL,
   `startswith` varchar(1) NOT NULL,
-  `pouetid` int(11),
+  `pouetid` int(11) DEFAULT NULL,
   `name` varchar(80) NOT NULL,
   `webpage` varchar(200) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `group_logo` varchar(100),
-  `found_date` date,
+  `group_logo` varchar(100) DEFAULT NULL,
+  `found_date` date DEFAULT NULL,
   `status` varchar(1) NOT NULL,
-  `created_by_id` int(11),
-  `last_updated` datetime,
+  `created_by_id` int(11) DEFAULT NULL,
+  `last_updated` datetime DEFAULT NULL,
   `wiki_link` varchar(200) NOT NULL,
-  `group_icon` varchar(100),
+  `group_icon` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`),
   KEY `webview_group_df90be6` (`startswith`),
@@ -1228,8 +1230,8 @@ DROP TABLE IF EXISTS `webview_label`;
 CREATE TABLE `webview_label` (
   `info` longtext NOT NULL,
   `startswith` varchar(1) NOT NULL,
-  `pouetid` int(11),
-  `last_updated` datetime,
+  `pouetid` int(11) DEFAULT NULL,
+  `last_updated` datetime DEFAULT NULL,
   `name` varchar(40) NOT NULL,
   `wiki_link` varchar(200) NOT NULL,
   `webpage` varchar(200) NOT NULL,
@@ -1237,10 +1239,10 @@ CREATE TABLE `webview_label` (
   `created_by_id` int(11) DEFAULT NULL,
   `status` varchar(1) NOT NULL,
   `found_date` date DEFAULT NULL,
-  `logo` varchar(100),
+  `logo` varchar(100) DEFAULT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `hol_id` int(11),
-  `label_icon` varchar(100),
+  `hol_id` int(11) DEFAULT NULL,
+  `label_icon` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`),
   KEY `webview_label_df90be6` (`startswith`),
@@ -1273,7 +1275,7 @@ CREATE TABLE `webview_link` (
   `name` varchar(40) NOT NULL,
   `submitted_by_id` int(11) DEFAULT NULL,
   `link_url` varchar(200) NOT NULL,
-  `link_image` varchar(100),
+  `link_image` varchar(100) DEFAULT NULL,
   `url_cat_id` int(11) NOT NULL,
   `priority` tinyint(1) NOT NULL,
   `approved_by_id` int(11) DEFAULT NULL,
@@ -1281,7 +1283,7 @@ CREATE TABLE `webview_link` (
   `keywords` varchar(60) DEFAULT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `link_type` varchar(1) NOT NULL,
-  `last_updated` datetime,
+  `last_updated` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`),
   UNIQUE KEY `link_url` (`link_url`),
@@ -1314,7 +1316,7 @@ DROP TABLE IF EXISTS `webview_linkcategory`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `webview_linkcategory` (
   `description` longtext NOT NULL,
-  `icon` varchar(100),
+  `icon` varchar(100) DEFAULT NULL,
   `id_slug` varchar(50) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(60) NOT NULL,
@@ -1373,7 +1375,7 @@ CREATE TABLE `webview_news` (
   `text` longtext NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `icon` varchar(200) NOT NULL,
-  `last_updated` datetime,
+  `last_updated` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1407,7 +1409,7 @@ CREATE TABLE `webview_objectlog` (
   KEY `webview_objectlog_fbfc09f1` (`user_id`),
   CONSTRAINT `content_type_id_refs_id_587f6188` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
   CONSTRAINT `user_id_refs_id_3243dc7c` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1416,6 +1418,7 @@ CREATE TABLE `webview_objectlog` (
 
 LOCK TABLES `webview_objectlog` WRITE;
 /*!40000 ALTER TABLE `webview_objectlog` DISABLE KEYS */;
+INSERT INTO `webview_objectlog` VALUES (1,30,1,1,'2017-05-23 19:57:43','Approved song','');
 /*!40000 ALTER TABLE `webview_objectlog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1492,7 +1495,7 @@ DROP TABLE IF EXISTS `webview_privatemessage`;
 CREATE TABLE `webview_privatemessage` (
   `sender_id` int(11) NOT NULL,
   `to_id` int(11) NOT NULL,
-  `reply_to_id` int(11),
+  `reply_to_id` int(11) DEFAULT NULL,
   `message` longtext NOT NULL,
   `unread` tinyint(1) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1506,7 +1509,7 @@ CREATE TABLE `webview_privatemessage` (
   CONSTRAINT `reply_to_id_refs_id_429f2a53` FOREIGN KEY (`reply_to_id`) REFERENCES `webview_privatemessage` (`id`),
   CONSTRAINT `sender_id_refs_id_f4917bf0` FOREIGN KEY (`sender_id`) REFERENCES `auth_user` (`id`),
   CONSTRAINT `to_id_refs_id_f4917bf0` FOREIGN KEY (`to_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1515,6 +1518,7 @@ CREATE TABLE `webview_privatemessage` (
 
 LOCK TABLES `webview_privatemessage` WRITE;
 /*!40000 ALTER TABLE `webview_privatemessage` DISABLE KEYS */;
+INSERT INTO `webview_privatemessage` VALUES (1,1,NULL,'This is an automated message from the example.com Approval System.\n\nThis message is to inform you that your recent upload ([song]1[/song]) has been Accepted on the site. The direct link to the song is: http://example.com/demovibes/song/1/\n\nIf you have any additional questions, please contact an administrator/moderator. Thank-you.\n',1,1,'2017-05-23 19:57:43','Song Upload Status Changed To: Accepted',1);
 /*!40000 ALTER TABLE `webview_privatemessage` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1534,7 +1538,7 @@ CREATE TABLE `webview_queue` (
   `playtime` datetime DEFAULT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `priority` tinyint(1) NOT NULL,
-  `eta` datetime,
+  `eta` datetime DEFAULT NULL,
   `description` longtext NOT NULL,
   PRIMARY KEY (`id`),
   KEY `webview_queue_dc16359a` (`requested`),
@@ -1545,7 +1549,7 @@ CREATE TABLE `webview_queue` (
   KEY `webview_queue_acbe192d` (`priority`),
   CONSTRAINT `requested_by_id_refs_id_773451a8` FOREIGN KEY (`requested_by_id`) REFERENCES `auth_user` (`id`),
   CONSTRAINT `song_id_refs_id_16b92c92` FOREIGN KEY (`song_id`) REFERENCES `webview_song` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1554,6 +1558,7 @@ CREATE TABLE `webview_queue` (
 
 LOCK TABLES `webview_queue` WRITE;
 /*!40000 ALTER TABLE `webview_queue` DISABLE KEYS */;
+INSERT INTO `webview_queue` VALUES ('2017-05-23 19:57:53',0,1,1,NULL,NULL,1,0,'2017-05-23 19:57:53','');
 /*!40000 ALTER TABLE `webview_queue` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1573,7 +1578,7 @@ CREATE TABLE `webview_radiostream` (
   `bitrate` int(11) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(120) NOT NULL,
-  `user_id` int(11),
+  `user_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `webview_radiostream_fbfc09f1` (`user_id`),
   CONSTRAINT `user_id_refs_id_1af90e96` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
@@ -1598,14 +1603,14 @@ DROP TABLE IF EXISTS `webview_screenshot`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `webview_screenshot` (
   `startswith` varchar(1) NOT NULL,
-  `last_updated` datetime,
+  `last_updated` datetime DEFAULT NULL,
   `description` longtext NOT NULL,
-  `image` varchar(100),
+  `image` varchar(100) DEFAULT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `added_by_id` int(11) DEFAULT NULL,
   `name` varchar(40) NOT NULL,
   `status` varchar(1) NOT NULL,
-  `thumbnail` varchar(100),
+  `thumbnail` varchar(100) DEFAULT NULL,
   `type` varchar(1) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`),
@@ -1676,10 +1681,10 @@ CREATE TABLE `webview_song` (
   `status` varchar(1) NOT NULL,
   `bitrate` int(11) DEFAULT NULL,
   `file` varchar(200) NOT NULL,
-  `song_length` int(11),
+  `song_length` int(11) DEFAULT NULL,
   `samplerate` int(11) DEFAULT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `locked_until` datetime,
+  `locked_until` datetime DEFAULT NULL,
   `num_favorited` int(11) NOT NULL,
   `last_changed` datetime NOT NULL,
   `explicit` tinyint(1) NOT NULL,
@@ -1689,7 +1694,7 @@ CREATE TABLE `webview_song` (
   `pouetss` varchar(100) NOT NULL,
   `pouetgroup` varchar(100) NOT NULL,
   `pouettitle` varchar(100) NOT NULL,
-  `license_id` int(11),
+  `license_id` int(11) DEFAULT NULL,
   `playback_fadeout` tinyint(1) NOT NULL,
   `playback_bass_mode` varchar(4) NOT NULL,
   `playback_bass_inter` varchar(6) NOT NULL,
@@ -1703,7 +1708,7 @@ CREATE TABLE `webview_song` (
   KEY `webview_song_c9ad71dd` (`status`),
   CONSTRAINT `license_id_refs_id_73c9c49` FOREIGN KEY (`license_id`) REFERENCES `webview_songlicense` (`id`),
   CONSTRAINT `uploader_id_refs_id_61afd64f` FOREIGN KEY (`uploader_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1712,6 +1717,7 @@ CREATE TABLE `webview_song` (
 
 LOCK TABLES `webview_song` WRITE;
 /*!40000 ALTER TABLE `webview_song` DISABLE KEYS */;
+INSERT INTO `webview_song` VALUES ('b',NULL,1,'Bootup',0,0,0,'2017-05-23 19:57:34','A',0,'media/music/b/o/bootup_4KaKBty.mod',168,44100,1,'2017-05-23 19:57:53',0,'2017-05-23 19:57:53',0,0,-9.159996,'','','','',NULL,1,'','','','');
 /*!40000 ALTER TABLE `webview_song` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1735,7 +1741,7 @@ CREATE TABLE `webview_songapprovals` (
   CONSTRAINT `song_id_refs_id_2920ffea` FOREIGN KEY (`song_id`) REFERENCES `webview_song` (`id`),
   CONSTRAINT `approved_by_id_refs_id_2424756c` FOREIGN KEY (`approved_by_id`) REFERENCES `auth_user` (`id`),
   CONSTRAINT `uploaded_by_id_refs_id_2424756c` FOREIGN KEY (`uploaded_by_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1744,6 +1750,7 @@ CREATE TABLE `webview_songapprovals` (
 
 LOCK TABLES `webview_songapprovals` WRITE;
 /*!40000 ALTER TABLE `webview_songapprovals` DISABLE KEYS */;
+INSERT INTO `webview_songapprovals` VALUES ('2017-05-23 19:57:43',1,1,1,1);
 /*!40000 ALTER TABLE `webview_songapprovals` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1858,7 +1865,7 @@ CREATE TABLE `webview_songmetadata` (
   `comment` longtext NOT NULL,
   `ytvidid` varchar(30) NOT NULL,
   `ytvidoffset` int(10) unsigned NOT NULL,
-  `pouetid` int(11),
+  `pouetid` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `webview_songmetadata_c1efc3ee` (`release_year`),
   KEY `webview_songmetadata_c170b8c9` (`song_id`),
@@ -1872,7 +1879,7 @@ CREATE TABLE `webview_songmetadata` (
   CONSTRAINT `song_id_refs_id_bb9b426a` FOREIGN KEY (`song_id`) REFERENCES `webview_song` (`id`),
   CONSTRAINT `type_id_refs_id_de31c192` FOREIGN KEY (`type_id`) REFERENCES `webview_songtype` (`id`),
   CONSTRAINT `user_id_refs_id_b545be00` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1881,6 +1888,7 @@ CREATE TABLE `webview_songmetadata` (
 
 LOCK TABLES `webview_songmetadata` WRITE;
 /*!40000 ALTER TABLE `webview_songmetadata` DISABLE KEYS */;
+INSERT INTO `webview_songmetadata` VALUES ('','2017-05-23 19:57:35',1,'',1,NULL,NULL,1,1,NULL,1,'','',0,NULL);
 /*!40000 ALTER TABLE `webview_songmetadata` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1901,7 +1909,7 @@ CREATE TABLE `webview_songmetadata_artists` (
   KEY `webview_songmetadata_artists_e995513f` (`artist_id`),
   CONSTRAINT `artist_id_refs_id_765b8645` FOREIGN KEY (`artist_id`) REFERENCES `webview_artist` (`id`),
   CONSTRAINT `songmetadata_id_refs_id_957b42` FOREIGN KEY (`songmetadata_id`) REFERENCES `webview_songmetadata` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1910,6 +1918,7 @@ CREATE TABLE `webview_songmetadata_artists` (
 
 LOCK TABLES `webview_songmetadata_artists` WRITE;
 /*!40000 ALTER TABLE `webview_songmetadata_artists` DISABLE KEYS */;
+INSERT INTO `webview_songmetadata_artists` VALUES (1,1,1);
 /*!40000 ALTER TABLE `webview_songmetadata_artists` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1982,8 +1991,8 @@ CREATE TABLE `webview_songplatform` (
   `description` longtext NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(64) NOT NULL,
-  `symbol` varchar(100),
-  `image` varchar(100),
+  `symbol` varchar(100) DEFAULT NULL,
+  `image` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `title` (`title`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -2009,8 +2018,8 @@ CREATE TABLE `webview_songtype` (
   `description` longtext NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(64) NOT NULL,
-  `symbol` varchar(100),
-  `image` varchar(100),
+  `symbol` varchar(100) DEFAULT NULL,
+  `image` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `title` (`title`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -2099,7 +2108,7 @@ CREATE TABLE `webview_theme` (
   `title` varchar(20) NOT NULL,
   `default` tinyint(1) NOT NULL,
   `active` tinyint(1) NOT NULL,
-  `creator_id` int(11),
+  `creator_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `webview_theme_f97a5119` (`creator_id`),
   CONSTRAINT `creator_id_refs_id_7635510a` FOREIGN KEY (`creator_id`) REFERENCES `auth_user` (`id`)
@@ -2160,16 +2169,16 @@ CREATE TABLE `webview_userprofile` (
   `token` varchar(32) NOT NULL,
   `user_id` int(11) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `avatar` varchar(100),
+  `avatar` varchar(100) DEFAULT NULL,
   `infoline` varchar(50) NOT NULL,
   `visible_to` varchar(1) NOT NULL,
   `email_on_pm` tinyint(1) NOT NULL,
   `pm_accepted_upload` tinyint(1) NOT NULL,
   `paginate_favorites` tinyint(1) NOT NULL,
-  `last_activity` datetime,
-  `theme_id` int(11),
+  `last_activity` datetime DEFAULT NULL,
+  `theme_id` int(11) DEFAULT NULL,
   `custom_css` varchar(200) NOT NULL,
-  `fave_id` int(11),
+  `fave_id` int(11) DEFAULT NULL,
   `email_on_artist_comment` tinyint(1) NOT NULL,
   `location` varchar(40) NOT NULL,
   `email_on_group_add` tinyint(1) NOT NULL,
@@ -2178,7 +2187,7 @@ CREATE TABLE `webview_userprofile` (
   `icq_id` varchar(40) NOT NULL,
   `yahoo_id` varchar(40) NOT NULL,
   `aol_id` varchar(40) NOT NULL,
-  `hol_id` int(11),
+  `hol_id` int(11) DEFAULT NULL,
   `twitter_id` varchar(32) NOT NULL,
   `use_tags` tinyint(1) NOT NULL,
   `last_changed` datetime NOT NULL,
@@ -2203,7 +2212,7 @@ CREATE TABLE `webview_userprofile` (
 
 LOCK TABLES `webview_userprofile` WRITE;
 /*!40000 ALTER TABLE `webview_userprofile` DISABLE KEYS */;
-INSERT INTO `webview_userprofile` VALUES ('',NULL,NULL,'','nectaflag','',1,1,'','das admin','A',0,1,1,'2017-05-23 19:16:20',NULL,'',NULL,0,'',0,0,'','','','',NULL,'',1,'2017-05-23 19:16:20',1,1,'10.0.2.2',0),('',NULL,NULL,'','','',2,2,'','','N',0,0,0,NULL,NULL,'',NULL,0,'',0,0,'','','','',NULL,'',0,'2017-05-23 19:18:16',0,0,'',0);
+INSERT INTO `webview_userprofile` VALUES ('',NULL,NULL,'','nectaflag','',1,1,'','das admin','A',0,1,1,'2017-05-23 19:56:46',NULL,'',NULL,0,'',0,0,'','','','',NULL,'',1,'2017-05-23 19:56:46',1,1,'10.0.2.2',0),('',NULL,NULL,'','','',2,2,'','','N',0,0,0,NULL,NULL,'',NULL,0,'',0,0,'','','','',NULL,'',0,'2017-05-23 19:18:16',0,0,'',0);
 /*!40000 ALTER TABLE `webview_userprofile` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -2216,4 +2225,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-23 19:18:42
+-- Dump completed on 2017-05-23 19:58:24

@@ -7,4 +7,4 @@ LOGPATH="/home/vagrant/logs"
 
 cd ${RUNPATH}
 
-nohup python sockulf.py >"$LOGPATH/sockulf.log" 2>"$LOGPATH/sockulf.err"
+nohup python sockulf.py >${LOGPATH}/sockulf.log 2>${LOGPATH}/sockulf.err &

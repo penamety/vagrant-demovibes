@@ -1,0 +1,6 @@
+vagrant/.vagrant
+vagrant/*.retry
+demovibes
+media/music/*.mp3
+media/music/*.ogg
+media/music/*.flac

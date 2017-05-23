@@ -21,3 +21,8 @@ your demovibes instance will be at: http://localhost:8080/
 icecast is at: http://localhost:8000/ (this is not where nectarine/demovibes webpage will be)
 
 username/pass: admin/admin
+
+Acknowledements
+===============
+
+Includes code from http://jplayer.org under the mit license (see data/player/MIT-LICENSE.txt for details)

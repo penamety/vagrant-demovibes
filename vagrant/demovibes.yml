@@ -219,7 +219,10 @@
     # yes, all done, start uwsgi
     - name: start demovibes
       become_user: vagrant
-      shell: "./start.sh"
-      args:
-        chdir: /vagrant/scripts
-        executable: /bin/bash
+      shell: "/vagrant/scripts/start-uwsgi.sh"
+    - name: start sockulf
+      become_user: vagrant
+      shell: "/vagrant/scripts/start-sockulf.sh"
+    - name: start demosauce
+      become_user: vagrant
+      shell: "sleep 3 && /vagrant/scripts/start-demosauce.sh"

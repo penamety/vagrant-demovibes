@@ -29,6 +29,13 @@ DATABASES = {
     }
 }
 
+DATABASE_ENGINE = 'django.db.backends.mysql'
+DATABASE_HOST = '127.0.0.1'
+DATABASE_NAME = 'demovibes'
+DATABASE_PASSWORD = 'demovibes'
+DATABASE_PORT = '3306'
+DATABASE_USER = 'demovibes'
+
 PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.PBKDF2PasswordHasher',
     'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
@@ -49,8 +56,10 @@ SITE_ID = 1
 ACCOUNT_ACTIVATION_DAYS = 30
 
 EMAIL_HOST = "localhost"
-DEFAULT_FROM_EMAIL = "noreply@demovibes"
+DEFAULT_FROM_EMAIL = "noreply@localhost"
 FILE_UPLOAD_PERMISSIONS = 0644
+
+DEMOSAUCE_SCAN = "/home/vagrant/src/demosauce/dscan"
 
 ADMIN_NOTIFY_ON_NEW_USER = 0
 USER_SEND_CONF_OK = 1

@@ -16,8 +16,8 @@ Run in terminal:
 ```
 from the vagrant-demovibes folder and follow instructions from the script.
 
-your demovibes instance will be at http://localhost:8080
+your demovibes instance will be at: http://localhost:8080/
 
-the stream is at http://localhost:8000/nectarine
+icecast is at: http://localhost:8000/ (this is not where nectarine/demovibes webpage will be)
 
 username/pass: admin/admin

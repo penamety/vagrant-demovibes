@@ -1,0 +1,10 @@
+<uwsgi>
+  <socket>127.0.0.1:3032</socket>
+  <chmod>666</chmod>
+  <module>uwsgi_eventhandler</module>
+  <master/>
+  <async>1500</async>
+  <ugreen/>
+  <pidfile>/tmp/demovibes-events-uwsgi.pid</pidfile>
+  <daemonize>/home/vagrant/logs/uwsgi-events.log</daemonize>
+</uwsgi>

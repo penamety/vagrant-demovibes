@@ -1,0 +1,19 @@
+<uwsgi>
+  <socket>127.0.0.1:3031</socket>
+  <chmod>666</chmod>
+  <module>uwsgi-launcher</module>
+  <buffer-size>16384</buffer-size>
+  <pythonpath>/home/vagrant/demovibes/demovibes</pythonpath>
+  <!-- <so-keepalive/> -->
+  <!-- <enable-threads/> -->
+  <processes>8</processes>
+  <master/>
+  <harakiri>300</harakiri>
+  <!-- <disable-logging/> -->
+  <home>/home/vagrant/pyenv</home>
+  <daemonize>/home/vagrant/logs/uwsgi-frontend.log</daemonize>
+  <pidfile>/tmp/demovibes-uwsgi.pid</pidfile>
+  <!-- <socket-timeout>15</socket-timeout>
+  <listen>128</listen>
+  <reload-on-rss>128</reload-on-rss> -->
+</uwsgi>

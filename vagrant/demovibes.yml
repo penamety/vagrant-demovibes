@@ -1,0 +1,236 @@
+---
+- hosts: default localhost
+  become: true
+  become_user: root
+  vars:
+    venv: /home/vagrant/pyenv
+  tasks:
+    ### setup system
+    - name: setup apt
+      apt:
+        update_cache: no
+        cache_valid_time: 3600
+
+    - name: install system deps
+      apt: name={{item}} state=present
+      with_items:
+        - unzip
+        - git
+        - vim-nox
+
+    ### install demosauce stuff
+    - name: install demosauce dependencies
+      apt: name={{item}} state=present
+      with_items:
+        - build-essential
+        - libshout-dev
+        - libmp3lame-dev
+        - libavutil-dev
+        - libavformat-dev
+        - libavcodec-dev
+        - libswresample-dev
+        - libchromaprint-dev
+    - name: create src dir
+      file: path=/home/vagrant/src mode=0755 state=directory owner=vagrant group=vagrant
+    - name: git checkout demosauce
+      become_user: vagrant
+      git:
+        repo: https://gitlab.com/maep/demosauce.git
+        dest: /home/vagrant/src/demosauce
+        update: no
+    - name: override the onfigure script
+      copy:
+        remote_src: true
+        src: /vagrant/conf/demosauce/configure
+        dest: /home/vagrant/src/demosauce/configure
+        mode: 0755
+        owner: vagrant
+        group: vagrant
+    - name: build demosauce from source
+      become_user: vagrant
+      shell: "./configure && make -j2"
+      args:
+        chdir: /home/vagrant/src/demosauce
+        creates: /home/vagrant/src/demosauce/dscan
+        executable: /bin/bash
+    - name: make dir for demosauce binaries
+      file: name=/home/vagrant/demosauce mode=0755 state=directory owner=vagrant group=vagrant
+    - name: copy demosauce.conf
+      copy:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        remote_src: true
+        mode: 0755
+        owner: vagrant
+        group: vagrant
+      with_items:
+        - { src: "/vagrant/conf/demosauce/demosauce.conf", dest: "/home/vagrant/demosauce/demosauce.conf" }
+    - name: link demosauce & dscan & libs
+      file:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        state: link
+        owner: vagrant
+        group: vagrant
+      with_items:
+        - { src: "/home/vagrant/src/demosauce/dscan", dest: "/home/vagrant/demosauce/dscan" }
+        - { src: "/home/vagrant/src/demosauce/demosauce", dest: "/home/vagrant/demosauce/demosauce" }
+        - { src: "/home/vagrant/src/demosauce/libs", dest: "/home/vagrant/demosauce/libs" }
+    - name: copy the compat scan script
+      copy:
+        remote_src: true
+        src: /home/vagrant/src/demosauce/contrib/scan
+        dest: /home/vagrant/demosauce/scan
+        mode: 0755
+        owner: vagrant
+        group: vagrant
+    - name: create logs dir
+      file: path=/home/vagrant/logs mode=0755 state=directory owner=vagrant group=vagrant
+
+
+    ### install demovibes stuff and make it run
+    - name: create whoosh dir
+      file: path=/home/vagrant/whoosh mode=0755 state=directory owner=vagrant group=vagrant
+    - name: install python dependencies
+      apt: name={{item}} state=present
+      with_items:
+        - python-pip
+        - python-virtualenv
+        - python2.7-dev
+        - python-dev
+        - libmysqlclient-dev
+        - libjpeg-dev
+        - libpng-dev
+        - libenchant-dev
+    - name: create pyenv
+      become_user: vagrant
+      command: virtualenv {{ venv }} -p python2.7 creates={{ venv }}
+    - name: pip install demovibes python deps
+      become_user: vagrant
+      pip: >
+        virtualenv={{ venv }}
+        requirements=/home/vagrant/demovibes/requirements/prod.txt
+
+    ### mysql stuff inside the vm
+    - name: install mysql & memcached
+      apt: name={{ item }} state=present
+      with_items:
+        - python-mysqldb
+        - mysql-server
+        - memcached
+    - name: create mysqldb demovibes
+      mysql_db:
+        name: demovibes
+        state: present
+        encoding: utf8
+        collation: utf8_general_ci
+    - name: purge anonymous users from mysql
+      mysql_user:
+        name: ''
+        host_all: yes
+        state: absent
+    - name: create mysql user demovibes
+      mysql_user:
+        name: demovibes
+        password: demovibes
+        priv: '*.*:ALL,GRANT'
+        state: present
+
+    ### demovibes stuff (cont.)
+    - name: copy settings_local.py
+      copy:
+        remote_src: true
+        src: /vagrant/conf/settings_local.py
+        dest: /home/vagrant/demovibes/demovibes/settings_local.py
+        mode: 0644
+        owner: vagrant
+        group: vagrant
+
+    - name: copy captcha_data.py
+      copy:
+        remote_src: true
+        src: /vagrant/conf/captcha_data.py
+        dest: /home/vagrant/demovibes/demovibes/registration/captcha_data.py
+        mode: 0644
+        owner: vagrant
+        group: vagrant
+
+    # db
+    - name: import default database data
+      mysql_db:
+        state: import
+        name: demovibes
+        target: /vagrant/demovibes.sql
+    - name: validate db
+      become_user: vagrant
+      shell: ". /home/vagrant/pyenv/bin/activate && ./manage.py syncdb --migrate && touch syncdb.lock"
+      args:
+        chdir: /home/vagrant/demovibes/demovibes
+        executable: /bin/bash
+        creates: /home/vagrant/demovibes/demovibes/syncdb.lock
+#    - name: import music
+#      become_user: vagrant
+#      shell: ". /home/vagrant/pyenv/bin/activate && chmod 755 pyImportMp3.py && /vagrant/scripts/import_music.sh"
+#      args:
+#        chdir: /home/vagrant/demovibes/demovibes
+#        executable: /bin/bash
+    # icecast
+    - name: install icecast2
+      apt: name=icecast2 state=present
+    - name: copy icecast2 config
+      copy:
+        remote_src: true
+        src: /vagrant/conf/icecast.xml
+        dest: /etc/icecast2/icecast.xml
+    - name: copy icecast2 config to default
+      copy:
+        remote_src: true
+        src: /vagrant/conf/icecast2
+        dest: /etc/default/icecast2
+    # nginx
+    - name: install nginx
+      apt: name=nginx-full state=present
+    - name: purge nginx default config
+      file: path=/etc/nginx/sites-enabled/default state=absent
+    - name: copy nginx config
+      copy:
+        remote_src: true
+        src: /vagrant/conf/nginx/demovibes.conf
+        dest: /etc/nginx/sites-enabled/demovibes.conf
+        mode: 0644
+    # restart daemons
+    - name: restart nginx & icecast2
+      shell: "systemctl restart icecast2 && systemctl restart nginx"
+
+    # uwsgi
+    - name: install uwsgi dependencies
+      apt: name=libxml2-dev state=present
+    - name: download uwsgi source
+      get_url:
+        url: https://github.com/unbit/uwsgi/archive/0.9.5.1.tar.gz
+        dest: /usr/src/uwsgi-0.9.5.1.tar.gz
+    - name: unpack uwsgi
+      unarchive:
+        remote_src: true
+        src: /usr/src/uwsgi-0.9.5.1.tar.gz
+        dest: /usr/src
+    - name: build & install uwsgi
+      shell: "make -j2 -f Makefile"
+      args:
+        chdir: /usr/src/uwsgi-0.9.5.1
+    - name: copy uwsgi to local
+      copy:
+        remote_src: true
+        src: /usr/src/uwsgi-0.9.5.1/uwsgi
+        dest: /usr/local/bin/uwsgi
+        mode: 0755
+        owner: root
+        group: root
+
+    # yes, all done, start uwsgi
+    - name: start demovibes
+      become_user: vagrant
+      shell: "./start.sh"
+      args:
+        chdir: /vagrant/scripts
+        executable: /bin/bash

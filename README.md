@@ -1,6 +1,11 @@
 Usage
 =====
 
+Prequisites:
+- vagrant
+- ansible
+must be installed on your host system
+
 Run in terminal:
 ```
 ./init.sh

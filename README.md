@@ -1,3 +1,7 @@
+BIG FAT WARNING
+===============
+This is intended to run a local development server for the demovibes stack - and not ever, _never ever!_ on prod servers. *You have been WARNED!*
+
 Usage
 =====
 

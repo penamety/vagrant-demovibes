@@ -127,7 +127,7 @@ CREATE TABLE `auth_user` (
 
 LOCK TABLES `auth_user` WRITE;
 /*!40000 ALTER TABLE `auth_user` DISABLE KEYS */;
-INSERT INTO `auth_user` VALUES (1,'admin','','','admin@localhost','pbkdf2_sha256$10000$3EzGbpHf5yaz$H+Qwpuq9A+HvyUPXL5W6opPNaB1TrddxYvCsOB0ITbI=',1,1,1,'2017-05-23 12:40:26','2017-05-23 12:40:26'),(2,'djrandom','','','djrandom@localhost','pbkdf2_sha256$10000$xWQZRKIhyWm0$edXtoCFVHsTKEqPCyxojn3+trz2jSZsCi1eYV1G3uqs=',1,1,1,'2017-05-23 13:19:21','2017-05-23 13:19:21');
+INSERT INTO `auth_user` VALUES (1,'admin','','','admin@localhost','pbkdf2_sha256$10000$m9iX6mod8vXt$pkQjIzWaSCtHTPGrCAh5XfehAe+W0WiCmMKx8aRTWsI=',1,1,1,'2017-05-23 12:40:26','2017-05-23 12:40:26'),(2,'djrandom','','','djrandom@local.host','pbkdf2_sha256$10000$RfvEyPYAEDjJ$7h8QbDi9t3x88xrPOzy85m2KnkYV6oiKiz3LrBauL/E=',1,1,1,'2017-05-23 19:17:26','2017-05-23 19:17:26');
 /*!40000 ALTER TABLE `auth_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -208,9 +208,9 @@ CREATE TABLE `django_admin_log` (
   PRIMARY KEY (`id`),
   KEY `django_admin_log_fbfc09f1` (`user_id`),
   KEY `django_admin_log_e4470c6e` (`content_type_id`),
-  CONSTRAINT `user_id_refs_id_c8665aa` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`),
-  CONSTRAINT `content_type_id_refs_id_288599e6` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  CONSTRAINT `content_type_id_refs_id_288599e6` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
+  CONSTRAINT `user_id_refs_id_c8665aa` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -219,6 +219,7 @@ CREATE TABLE `django_admin_log` (
 
 LOCK TABLES `django_admin_log` WRITE;
 /*!40000 ALTER TABLE `django_admin_log` DISABLE KEYS */;
+INSERT INTO `django_admin_log` VALUES (1,'2017-05-23 19:16:06',1,19,'1','admin',1,''),(2,'2017-05-23 19:16:15',1,19,'1','admin',2,'Changed country.'),(3,'2017-05-23 19:18:16',1,19,'2','djrandom',2,'Changed email_on_artist_add, email_on_artist_comment, email_on_group_add, email_on_pm, paginate_favorites, pm_accepted_upload, show_screenshots, show_youtube, use_tags and visible_to.');
 /*!40000 ALTER TABLE `django_admin_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -373,7 +374,7 @@ CREATE TABLE `django_site` (
 
 LOCK TABLES `django_site` WRITE;
 /*!40000 ALTER TABLE `django_site` DISABLE KEYS */;
-INSERT INTO `django_site` VALUES (1,'localhost','localhost');
+INSERT INTO `django_site` VALUES (1,'example.com','example.com');
 /*!40000 ALTER TABLE `django_site` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -603,7 +604,7 @@ CREATE TABLE `south_migrationhistory` (
 
 LOCK TABLES `south_migrationhistory` WRITE;
 /*!40000 ALTER TABLE `south_migrationhistory` DISABLE KEYS */;
-INSERT INTO `south_migrationhistory` VALUES (1,'webview','0001_initial','2017-05-23 13:08:01'),(2,'webview','0002_extending_profile','2017-05-23 13:08:01'),(3,'webview','0003_profile_send_on_email','2017-05-23 13:08:01'),(4,'webview','0004_queue_eta','2017-05-23 13:08:01'),(5,'webview','0005_added_song_lockfield','2017-05-23 13:08:02'),(6,'webview','0006_set_locktime','2017-05-23 13:08:02'),(7,'webview','0007_add_song_num_favorited','2017-05-23 13:08:02'),(8,'webview','0008_populate_song_num_favorited','2017-05-23 13:08:02'),(9,'webview','0009_add_artist_user_link','2017-05-23 13:08:02'),(10,'webview','0010_song_approval_list','2017-05-23 13:08:02'),(11,'webview','0011_add_pm_on_accept','2017-05-23 13:08:02'),(12,'webview','0012_extend_profile','2017-05-23 13:08:02'),(13,'webview','0013_country_list','2017-05-23 13:08:02'),(14,'webview','0014_pm_visibility_field','2017-05-23 13:08:02'),(15,'webview','0015_theme_fields','2017-05-23 13:08:02'),(16,'webview','0016_compilation_db_artist_voting','2017-05-23 13:08:02'),(17,'webview','0017_compilation_db_tweaks','2017-05-23 13:08:02'),(18,'webview','0018_more_compilation_tweaks','2017-05-23 13:08:02'),(19,'webview','0019_more_compilation_db_changes','2017-05-23 13:08:03'),(20,'webview','0020_forum_updates_db_changes','2017-05-23 13:08:03'),(21,'webview','0021_various_approval_states','2017-05-23 13:08:03'),(22,'webview','0022_artist_image','2017-05-23 13:08:03'),(23,'webview','0023_tweaks_to_creation_models','2017-05-23 13:08:03'),(24,'webview','0024_more_db_tweaks','2017-05-23 13:08:03'),(25,'webview','0025_remix_id_last_fm_id','2017-05-23 13:08:03'),(26,'webview','0026_more_indexes','2017-05-23 13:08:03'),(27,'webview','0026_new_database_features','2017-05-23 13:08:04'),(28,'webview','0027_tweaked_some_db_entries','2017-05-23 13:08:04'),(29,'webview','0028_rearranged_model_positions','2017-05-23 13:08:04'),(30,'webview','0029_more_data_field_tweaks_additions','2017-05-23 13:08:04'),(31,'webview','0030_added_wos_support','2017-05-23 13:08:04'),(32,'webview','0031_changed_wos_to_char','2017-05-23 13:08:04'),(33,'webview','0032_added_hol_db_support','2017-05-23 13:08:05'),(34,'webview','0033_try_index_to_queue_played','2017-05-23 13:08:05'),(35,'webview','0034_added_deceased_artist_support','2017-05-23 13:08:05'),(36,'webview','0035_correction_to_song_reldate','2017-05-23 13:08:05'),(37,'webview','0036_add_image_fields_for_platform','2017-05-23 13:08:05'),(38,'webview','0037_added_twitter_and_stuff','2017-05-23 13:08:05'),(39,'webview','0038_added_text_link_database','2017-05-23 13:08:05'),(40,'webview','0039_add_last_changed','2017-05-23 13:08:05'),(41,'webview','0040_multiple_db_changes_tweaks','2017-05-23 13:08:06'),(42,'webview','0041_multiple_db_changes_additions','2017-05-23 13:08:06'),(43,'webview','0042_add_replay_stuff','2017-05-23 13:08:06'),(44,'webview','0043_add_stream_owner','2017-05-23 13:08:06'),(45,'webview','0044_add_tag_history','2017-05-23 13:08:07'),(46,'webview','0045_add_profile_last_changed','2017-05-23 13:08:07'),(47,'webview','0046_change_compilation_title_length','2017-05-23 13:08:08'),(48,'webview','0047_auto__chg_field_compilation_name','2017-05-23 13:08:08'),(49,'webview','0048_auto','2017-05-23 13:08:08'),(50,'webview','0049_auto','2017-05-23 13:08:08'),(51,'webview','0050_auto__add_field_song_pouetlink__add_field_song_pouetss__add_field_song','2017-05-23 13:08:08'),(52,'webview','0051_auto__chg_field_song_file','2017-05-23 13:08:08'),(53,'webview','0052_auto__add_genericbaselink__add_genericlink','2017-05-23 13:08:08'),(54,'webview','0053_auto','2017-05-23 13:08:08'),(55,'webview','0054_increased_length_of_generic_linkfield','2017-05-23 13:08:09'),(56,'webview','0055_auto__add_field_song_ytvidid__add_field_song_ytvidoffset','2017-05-23 13:08:09'),(57,'webview','0056_auto__add_field_userprofile_show_youtube','2017-05-23 13:08:09'),(58,'webview','0057_auto__add_field_songcomment_staff_comment__add_field_songdownload_stat','2017-05-23 13:08:09'),(59,'webview','0058_auto__add_songmetadata__chg_field_songcomment_staff_comment__chg_field','2017-05-23 13:08:10'),(60,'webview','0059_move_metadata','2017-05-23 13:08:10'),(61,'webview','0060_auto__add_field_songmetadata_comment','2017-05-23 13:08:10'),(62,'webview','0061_auto__add_field_genericlink_comment','2017-05-23 13:08:10'),(63,'webview','0062_auto__add_field_genericlink_user','2017-05-23 13:08:10'),(64,'webview','0063_auto__add_field_songmetadata_ytvidid__add_field_songmetadata_ytvidoffs','2017-05-23 13:08:10'),(65,'webview','0064_move_metadata2','2017-05-23 13:08:11'),(66,'webview','0065_auto','2017-05-23 13:08:11'),(67,'webview','0066_auto__add_compilationsonglist__add_field_queue_description','2017-05-23 13:08:11'),(68,'webview','0067_move_compilationdata','2017-05-23 13:08:11'),(69,'webview','0068_auto__del_field_compilationsonglist_num__add_field_compilationsonglist','2017-05-23 13:08:11'),(70,'webview','0069_auto__chg_field_song_pouetlink','2017-05-23 13:08:11'),(71,'webview','0070_chg_field_song_pouetlink','2017-05-23 13:08:12'),(72,'webview','0071_auto__add_songlicense__add_field_song_license','2017-05-23 13:08:12'),(73,'webview','0072_auto__add_objectlog','2017-05-23 13:08:12'),(74,'webview','0073_improved_screenshot_abilities','2017-05-23 13:08:12'),(75,'webview','0074_add_screenshot_control_option','2017-05-23 13:08:12'),(76,'webview','0075_auto__del_field_song_wos_id__del_field_song_ytvidid__del_field_song_cv','2017-05-23 13:08:13'),(77,'webview','0076_auto__chg_field_screenshot_name','2017-05-23 13:08:13'),(78,'webview','0077_auto__add_screenshotobjectlink__chg_field_screenshot_name','2017-05-23 13:08:13'),(79,'webview','0078_move_genericlink','2017-05-23 13:08:13'),(80,'webview','0079_auto__del_field_screenshot_object_id__del_field_screenshot_content_typ','2017-05-23 13:08:13'),(81,'webview','0080_auto__add_unique_screenshotobjectlink_image_object_id_content_type','2017-05-23 13:08:14'),(82,'webview','0081_auto__add_field_song_playback_fadeout__add_field_song_playback_bass_mo','2017-05-23 13:08:14'),(83,'webview','0082_change_compilation_screen_format','2017-05-23 13:08:14'),(84,'webview','0083_auto__add_field_objectlog_extra','2017-05-23 13:08:14'),(85,'webview','0084_auto__chg_field_ajaxevent_event','2017-05-23 13:08:14'),(86,'webview','0085_auto__add_field_theme_default','2017-05-23 13:08:15'),(87,'webview','0086_auto__del_field_theme_preview__add_field_theme_active__add_field_theme','2017-05-23 13:08:15'),(88,'webview','0087_auto__add_field_logo_legacy','2017-05-23 13:08:15'),(89,'webview','0087_auto__add_field_song_playback_bass_mix','2017-05-23 13:08:15'),(90,'webview','0088_auto__chg_field_song_playback_bass_ramp__chg_field_song_playback_bass_','2017-05-23 13:08:15'),(91,'webview','0089_auto__add_onelinermuted','2017-05-23 13:08:16'),(92,'webview','0090_auto__add_field_userprofile_last_ip__chg_field_onelinermuted_reason','2017-05-23 13:08:16'),(93,'webview','0091_auto__add_field_onelinermuted_ip_ban','2017-05-23 13:08:16'),(94,'webview','0092_auto__add_field_artist_scene_relevance','2017-05-23 13:08:16'),(95,'webview','0093_auto__add_field_onelinermuted_hits','2017-05-23 13:08:16'),(96,'webview','0094_auto__add_field_userprofile_hellbanned','2017-05-23 13:08:16'),(97,'registration','0001_initial','2017-05-23 13:08:17'),(98,'forum','0001_initial','2017-05-23 13:08:18'),(99,'forum','0002_added_private_forum_support','2017-05-23 13:08:18'),(100,'forum','0003_is_private_default','2017-05-23 13:08:18'),(101,'forum','0004_set_last_changed','2017-05-23 13:08:18'),(102,'django_extensions','0001_empty','2017-05-23 13:08:19'),(103,'openid_provider','0001_initial','2017-05-23 13:08:19'),(104,'openid_provider','0002_add_id_for_users','2017-05-23 13:08:19');
+INSERT INTO `south_migrationhistory` VALUES (1,'webview','0001_initial','2017-05-23 19:12:22'),(2,'webview','0002_extending_profile','2017-05-23 19:12:22'),(3,'webview','0003_profile_send_on_email','2017-05-23 19:12:22'),(4,'webview','0004_queue_eta','2017-05-23 19:12:22'),(5,'webview','0005_added_song_lockfield','2017-05-23 19:12:22'),(6,'webview','0006_set_locktime','2017-05-23 19:12:22'),(7,'webview','0007_add_song_num_favorited','2017-05-23 19:12:22'),(8,'webview','0008_populate_song_num_favorited','2017-05-23 19:12:22'),(9,'webview','0009_add_artist_user_link','2017-05-23 19:12:22'),(10,'webview','0010_song_approval_list','2017-05-23 19:12:22'),(11,'webview','0011_add_pm_on_accept','2017-05-23 19:12:22'),(12,'webview','0012_extend_profile','2017-05-23 19:12:22'),(13,'webview','0013_country_list','2017-05-23 19:12:22'),(14,'webview','0014_pm_visibility_field','2017-05-23 19:12:22'),(15,'webview','0015_theme_fields','2017-05-23 19:12:23'),(16,'webview','0016_compilation_db_artist_voting','2017-05-23 19:12:23'),(17,'webview','0017_compilation_db_tweaks','2017-05-23 19:12:23'),(18,'webview','0018_more_compilation_tweaks','2017-05-23 19:12:23'),(19,'webview','0019_more_compilation_db_changes','2017-05-23 19:12:23'),(20,'webview','0020_forum_updates_db_changes','2017-05-23 19:12:23'),(21,'webview','0021_various_approval_states','2017-05-23 19:12:23'),(22,'webview','0022_artist_image','2017-05-23 19:12:23'),(23,'webview','0023_tweaks_to_creation_models','2017-05-23 19:12:23'),(24,'webview','0024_more_db_tweaks','2017-05-23 19:12:24'),(25,'webview','0025_remix_id_last_fm_id','2017-05-23 19:12:24'),(26,'webview','0026_more_indexes','2017-05-23 19:12:24'),(27,'webview','0026_new_database_features','2017-05-23 19:12:24'),(28,'webview','0027_tweaked_some_db_entries','2017-05-23 19:12:24'),(29,'webview','0028_rearranged_model_positions','2017-05-23 19:12:24'),(30,'webview','0029_more_data_field_tweaks_additions','2017-05-23 19:12:25'),(31,'webview','0030_added_wos_support','2017-05-23 19:12:25'),(32,'webview','0031_changed_wos_to_char','2017-05-23 19:12:25'),(33,'webview','0032_added_hol_db_support','2017-05-23 19:12:25'),(34,'webview','0033_try_index_to_queue_played','2017-05-23 19:12:25'),(35,'webview','0034_added_deceased_artist_support','2017-05-23 19:12:25'),(36,'webview','0035_correction_to_song_reldate','2017-05-23 19:12:25'),(37,'webview','0036_add_image_fields_for_platform','2017-05-23 19:12:25'),(38,'webview','0037_added_twitter_and_stuff','2017-05-23 19:12:25'),(39,'webview','0038_added_text_link_database','2017-05-23 19:12:26'),(40,'webview','0039_add_last_changed','2017-05-23 19:12:26'),(41,'webview','0040_multiple_db_changes_tweaks','2017-05-23 19:12:26'),(42,'webview','0041_multiple_db_changes_additions','2017-05-23 19:12:26'),(43,'webview','0042_add_replay_stuff','2017-05-23 19:12:26'),(44,'webview','0043_add_stream_owner','2017-05-23 19:12:27'),(45,'webview','0044_add_tag_history','2017-05-23 19:12:27'),(46,'webview','0045_add_profile_last_changed','2017-05-23 19:12:28'),(47,'webview','0046_change_compilation_title_length','2017-05-23 19:12:28'),(48,'webview','0047_auto__chg_field_compilation_name','2017-05-23 19:12:28'),(49,'webview','0048_auto','2017-05-23 19:12:28'),(50,'webview','0049_auto','2017-05-23 19:12:28'),(51,'webview','0050_auto__add_field_song_pouetlink__add_field_song_pouetss__add_field_song','2017-05-23 19:12:28'),(52,'webview','0051_auto__chg_field_song_file','2017-05-23 19:12:28'),(53,'webview','0052_auto__add_genericbaselink__add_genericlink','2017-05-23 19:12:29'),(54,'webview','0053_auto','2017-05-23 19:12:29'),(55,'webview','0054_increased_length_of_generic_linkfield','2017-05-23 19:12:29'),(56,'webview','0055_auto__add_field_song_ytvidid__add_field_song_ytvidoffset','2017-05-23 19:12:29'),(57,'webview','0056_auto__add_field_userprofile_show_youtube','2017-05-23 19:12:29'),(58,'webview','0057_auto__add_field_songcomment_staff_comment__add_field_songdownload_stat','2017-05-23 19:12:29'),(59,'webview','0058_auto__add_songmetadata__chg_field_songcomment_staff_comment__chg_field','2017-05-23 19:12:30'),(60,'webview','0059_move_metadata','2017-05-23 19:12:30'),(61,'webview','0060_auto__add_field_songmetadata_comment','2017-05-23 19:12:30'),(62,'webview','0061_auto__add_field_genericlink_comment','2017-05-23 19:12:30'),(63,'webview','0062_auto__add_field_genericlink_user','2017-05-23 19:12:30'),(64,'webview','0063_auto__add_field_songmetadata_ytvidid__add_field_songmetadata_ytvidoffs','2017-05-23 19:12:31'),(65,'webview','0064_move_metadata2','2017-05-23 19:12:31'),(66,'webview','0065_auto','2017-05-23 19:12:31'),(67,'webview','0066_auto__add_compilationsonglist__add_field_queue_description','2017-05-23 19:12:31'),(68,'webview','0067_move_compilationdata','2017-05-23 19:12:31'),(69,'webview','0068_auto__del_field_compilationsonglist_num__add_field_compilationsonglist','2017-05-23 19:12:31'),(70,'webview','0069_auto__chg_field_song_pouetlink','2017-05-23 19:12:32'),(71,'webview','0070_chg_field_song_pouetlink','2017-05-23 19:12:32'),(72,'webview','0071_auto__add_songlicense__add_field_song_license','2017-05-23 19:12:32'),(73,'webview','0072_auto__add_objectlog','2017-05-23 19:12:32'),(74,'webview','0073_improved_screenshot_abilities','2017-05-23 19:12:32'),(75,'webview','0074_add_screenshot_control_option','2017-05-23 19:12:32'),(76,'webview','0075_auto__del_field_song_wos_id__del_field_song_ytvidid__del_field_song_cv','2017-05-23 19:12:33'),(77,'webview','0076_auto__chg_field_screenshot_name','2017-05-23 19:12:33'),(78,'webview','0077_auto__add_screenshotobjectlink__chg_field_screenshot_name','2017-05-23 19:12:33'),(79,'webview','0078_move_genericlink','2017-05-23 19:12:33'),(80,'webview','0079_auto__del_field_screenshot_object_id__del_field_screenshot_content_typ','2017-05-23 19:12:33'),(81,'webview','0080_auto__add_unique_screenshotobjectlink_image_object_id_content_type','2017-05-23 19:12:34'),(82,'webview','0081_auto__add_field_song_playback_fadeout__add_field_song_playback_bass_mo','2017-05-23 19:12:34'),(83,'webview','0082_change_compilation_screen_format','2017-05-23 19:12:34'),(84,'webview','0083_auto__add_field_objectlog_extra','2017-05-23 19:12:34'),(85,'webview','0084_auto__chg_field_ajaxevent_event','2017-05-23 19:12:34'),(86,'webview','0085_auto__add_field_theme_default','2017-05-23 19:12:35'),(87,'webview','0086_auto__del_field_theme_preview__add_field_theme_active__add_field_theme','2017-05-23 19:12:35'),(88,'webview','0087_auto__add_field_logo_legacy','2017-05-23 19:12:35'),(89,'webview','0087_auto__add_field_song_playback_bass_mix','2017-05-23 19:12:35'),(90,'webview','0088_auto__chg_field_song_playback_bass_ramp__chg_field_song_playback_bass_','2017-05-23 19:12:35'),(91,'webview','0089_auto__add_onelinermuted','2017-05-23 19:12:35'),(92,'webview','0090_auto__add_field_userprofile_last_ip__chg_field_onelinermuted_reason','2017-05-23 19:12:36'),(93,'webview','0091_auto__add_field_onelinermuted_ip_ban','2017-05-23 19:12:36'),(94,'webview','0092_auto__add_field_artist_scene_relevance','2017-05-23 19:12:36'),(95,'webview','0093_auto__add_field_onelinermuted_hits','2017-05-23 19:12:36'),(96,'webview','0094_auto__add_field_userprofile_hellbanned','2017-05-23 19:12:36'),(97,'registration','0001_initial','2017-05-23 19:12:37'),(98,'forum','0001_initial','2017-05-23 19:12:38'),(99,'forum','0002_added_private_forum_support','2017-05-23 19:12:38'),(100,'forum','0003_is_private_default','2017-05-23 19:12:38'),(101,'forum','0004_set_last_changed','2017-05-23 19:12:38'),(102,'django_extensions','0001_empty','2017-05-23 19:12:39'),(103,'openid_provider','0001_initial','2017-05-23 19:12:39'),(104,'openid_provider','0002_add_id_for_users','2017-05-23 19:12:39');
 /*!40000 ALTER TABLE `south_migrationhistory` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -648,8 +649,8 @@ CREATE TABLE `tagging_taggeditem` (
   KEY `tagging_taggeditem_3747b463` (`tag_id`),
   KEY `tagging_taggeditem_e4470c6e` (`content_type_id`),
   KEY `tagging_taggeditem_829e37fd` (`object_id`),
-  CONSTRAINT `tag_id_refs_id_9f51000d` FOREIGN KEY (`tag_id`) REFERENCES `tagging_tag` (`id`),
-  CONSTRAINT `content_type_id_refs_id_f1f84eed` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`)
+  CONSTRAINT `content_type_id_refs_id_f1f84eed` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
+  CONSTRAINT `tag_id_refs_id_9f51000d` FOREIGN KEY (`tag_id`) REFERENCES `tagging_tag` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -702,20 +703,20 @@ CREATE TABLE `webview_artist` (
   `name` varchar(64) NOT NULL,
   `webpage` varchar(200) NOT NULL,
   `dob` date DEFAULT NULL,
-  `alias_of_id` int(11) DEFAULT NULL,
+  `alias_of_id` int(11),
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `link_to_user_id` int(11) DEFAULT NULL,
+  `link_to_user_id` int(11),
   `status` varchar(1) NOT NULL,
-  `artist_pic` varchar(100) DEFAULT NULL,
-  `created_by_id` int(11) DEFAULT NULL,
-  `last_updated` datetime DEFAULT NULL,
+  `artist_pic` varchar(100),
+  `created_by_id` int(11),
+  `last_updated` datetime,
   `last_fm_id` varchar(32) NOT NULL,
   `home_location` varchar(40) NOT NULL,
   `home_country` varchar(10) NOT NULL,
   `wiki_link` varchar(200) NOT NULL,
-  `hol_id` int(11) DEFAULT NULL,
+  `hol_id` int(11),
   `is_deceased` tinyint(1) NOT NULL,
-  `deceased_date` date DEFAULT NULL,
+  `deceased_date` date,
   `twitter_id` varchar(32) NOT NULL,
   `scene_relevance` longtext NOT NULL,
   PRIMARY KEY (`id`),
@@ -837,30 +838,30 @@ DROP TABLE IF EXISTS `webview_compilation`;
 CREATE TABLE `webview_compilation` (
   `info` longtext NOT NULL,
   `purchase_page` varchar(200) NOT NULL,
-  `cover_art` varchar(100) DEFAULT NULL,
+  `cover_art` varchar(100),
   `name` varchar(80) NOT NULL,
   `startswith` varchar(1) NOT NULL,
   `label` varchar(30) NOT NULL,
-  `rel_date` date DEFAULT NULL,
+  `rel_date` date,
   `details_page` varchar(200) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `num_discs` int(11) DEFAULT NULL,
   `running_time` int(11) DEFAULT NULL,
   `date_added` datetime NOT NULL,
   `status` varchar(1) NOT NULL,
-  `created_by_id` int(11) DEFAULT NULL,
+  `created_by_id` int(11),
   `media_format` varchar(30) NOT NULL,
-  `pouet` int(11) DEFAULT NULL,
+  `pouet` int(11),
   `bar_code` varchar(30) NOT NULL,
   `youtube_link` varchar(200) NOT NULL,
   `prod_notes` longtext NOT NULL,
   `download_link` varchar(200) NOT NULL,
-  `last_updated` datetime DEFAULT NULL,
+  `last_updated` datetime,
   `wiki_link` varchar(200) NOT NULL,
-  `zxdemo_id` int(11) DEFAULT NULL,
-  `projecttwosix_id` int(11) DEFAULT NULL,
-  `hol_id` int(11) DEFAULT NULL,
-  `comp_icon` varchar(100) DEFAULT NULL,
+  `zxdemo_id` int(11),
+  `projecttwosix_id` int(11),
+  `hol_id` int(11),
+  `comp_icon` varchar(100),
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`),
   KEY `webview_compilation_df90be6` (`startswith`),
@@ -1027,7 +1028,7 @@ DROP TABLE IF EXISTS `webview_faq`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `webview_faq` (
   `added` datetime NOT NULL,
-  `last_updated` datetime DEFAULT NULL,
+  `last_updated` datetime,
   `question` varchar(500) NOT NULL,
   `priority` int(11) DEFAULT NULL,
   `active` tinyint(1) NOT NULL,
@@ -1126,7 +1127,7 @@ CREATE TABLE `webview_genericlink` (
   `value` varchar(80) NOT NULL,
   `status` int(10) unsigned NOT NULL,
   `comment` longtext NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
+  `user_id` int(11),
   PRIMARY KEY (`id`),
   KEY `webview_genericlink_e4470c6e` (`content_type_id`),
   KEY `webview_genericlink_f44c31a0` (`link_id`),
@@ -1158,17 +1159,17 @@ DROP TABLE IF EXISTS `webview_group`;
 CREATE TABLE `webview_group` (
   `info` longtext NOT NULL,
   `startswith` varchar(1) NOT NULL,
-  `pouetid` int(11) DEFAULT NULL,
+  `pouetid` int(11),
   `name` varchar(80) NOT NULL,
   `webpage` varchar(200) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `group_logo` varchar(100) DEFAULT NULL,
-  `found_date` date DEFAULT NULL,
+  `group_logo` varchar(100),
+  `found_date` date,
   `status` varchar(1) NOT NULL,
-  `created_by_id` int(11) DEFAULT NULL,
-  `last_updated` datetime DEFAULT NULL,
+  `created_by_id` int(11),
+  `last_updated` datetime,
   `wiki_link` varchar(200) NOT NULL,
-  `group_icon` varchar(100) DEFAULT NULL,
+  `group_icon` varchar(100),
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`),
   KEY `webview_group_df90be6` (`startswith`),
@@ -1227,8 +1228,8 @@ DROP TABLE IF EXISTS `webview_label`;
 CREATE TABLE `webview_label` (
   `info` longtext NOT NULL,
   `startswith` varchar(1) NOT NULL,
-  `pouetid` int(11) DEFAULT NULL,
-  `last_updated` datetime DEFAULT NULL,
+  `pouetid` int(11),
+  `last_updated` datetime,
   `name` varchar(40) NOT NULL,
   `wiki_link` varchar(200) NOT NULL,
   `webpage` varchar(200) NOT NULL,
@@ -1236,10 +1237,10 @@ CREATE TABLE `webview_label` (
   `created_by_id` int(11) DEFAULT NULL,
   `status` varchar(1) NOT NULL,
   `found_date` date DEFAULT NULL,
-  `logo` varchar(100) DEFAULT NULL,
+  `logo` varchar(100),
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `hol_id` int(11) DEFAULT NULL,
-  `label_icon` varchar(100) DEFAULT NULL,
+  `hol_id` int(11),
+  `label_icon` varchar(100),
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`),
   KEY `webview_label_df90be6` (`startswith`),
@@ -1272,7 +1273,7 @@ CREATE TABLE `webview_link` (
   `name` varchar(40) NOT NULL,
   `submitted_by_id` int(11) DEFAULT NULL,
   `link_url` varchar(200) NOT NULL,
-  `link_image` varchar(100) DEFAULT NULL,
+  `link_image` varchar(100),
   `url_cat_id` int(11) NOT NULL,
   `priority` tinyint(1) NOT NULL,
   `approved_by_id` int(11) DEFAULT NULL,
@@ -1280,7 +1281,7 @@ CREATE TABLE `webview_link` (
   `keywords` varchar(60) DEFAULT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `link_type` varchar(1) NOT NULL,
-  `last_updated` datetime DEFAULT NULL,
+  `last_updated` datetime,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`),
   UNIQUE KEY `link_url` (`link_url`),
@@ -1313,7 +1314,7 @@ DROP TABLE IF EXISTS `webview_linkcategory`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `webview_linkcategory` (
   `description` longtext NOT NULL,
-  `icon` varchar(100) DEFAULT NULL,
+  `icon` varchar(100),
   `id_slug` varchar(50) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(60) NOT NULL,
@@ -1372,7 +1373,7 @@ CREATE TABLE `webview_news` (
   `text` longtext NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `icon` varchar(200) NOT NULL,
-  `last_updated` datetime DEFAULT NULL,
+  `last_updated` datetime,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1491,7 +1492,7 @@ DROP TABLE IF EXISTS `webview_privatemessage`;
 CREATE TABLE `webview_privatemessage` (
   `sender_id` int(11) NOT NULL,
   `to_id` int(11) NOT NULL,
-  `reply_to_id` int(11) DEFAULT NULL,
+  `reply_to_id` int(11),
   `message` longtext NOT NULL,
   `unread` tinyint(1) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1533,7 +1534,7 @@ CREATE TABLE `webview_queue` (
   `playtime` datetime DEFAULT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `priority` tinyint(1) NOT NULL,
-  `eta` datetime DEFAULT NULL,
+  `eta` datetime,
   `description` longtext NOT NULL,
   PRIMARY KEY (`id`),
   KEY `webview_queue_dc16359a` (`requested`),
@@ -1572,7 +1573,7 @@ CREATE TABLE `webview_radiostream` (
   `bitrate` int(11) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(120) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
+  `user_id` int(11),
   PRIMARY KEY (`id`),
   KEY `webview_radiostream_fbfc09f1` (`user_id`),
   CONSTRAINT `user_id_refs_id_1af90e96` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
@@ -1597,14 +1598,14 @@ DROP TABLE IF EXISTS `webview_screenshot`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `webview_screenshot` (
   `startswith` varchar(1) NOT NULL,
-  `last_updated` datetime DEFAULT NULL,
+  `last_updated` datetime,
   `description` longtext NOT NULL,
-  `image` varchar(100) DEFAULT NULL,
+  `image` varchar(100),
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `added_by_id` int(11) DEFAULT NULL,
   `name` varchar(40) NOT NULL,
   `status` varchar(1) NOT NULL,
-  `thumbnail` varchar(100) DEFAULT NULL,
+  `thumbnail` varchar(100),
   `type` varchar(1) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`),
@@ -1675,10 +1676,10 @@ CREATE TABLE `webview_song` (
   `status` varchar(1) NOT NULL,
   `bitrate` int(11) DEFAULT NULL,
   `file` varchar(200) NOT NULL,
-  `song_length` int(11) DEFAULT NULL,
+  `song_length` int(11),
   `samplerate` int(11) DEFAULT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `locked_until` datetime DEFAULT NULL,
+  `locked_until` datetime,
   `num_favorited` int(11) NOT NULL,
   `last_changed` datetime NOT NULL,
   `explicit` tinyint(1) NOT NULL,
@@ -1688,7 +1689,7 @@ CREATE TABLE `webview_song` (
   `pouetss` varchar(100) NOT NULL,
   `pouetgroup` varchar(100) NOT NULL,
   `pouettitle` varchar(100) NOT NULL,
-  `license_id` int(11) DEFAULT NULL,
+  `license_id` int(11),
   `playback_fadeout` tinyint(1) NOT NULL,
   `playback_bass_mode` varchar(4) NOT NULL,
   `playback_bass_inter` varchar(6) NOT NULL,
@@ -1857,7 +1858,7 @@ CREATE TABLE `webview_songmetadata` (
   `comment` longtext NOT NULL,
   `ytvidid` varchar(30) NOT NULL,
   `ytvidoffset` int(10) unsigned NOT NULL,
-  `pouetid` int(11) DEFAULT NULL,
+  `pouetid` int(11),
   PRIMARY KEY (`id`),
   KEY `webview_songmetadata_c1efc3ee` (`release_year`),
   KEY `webview_songmetadata_c170b8c9` (`song_id`),
@@ -1981,8 +1982,8 @@ CREATE TABLE `webview_songplatform` (
   `description` longtext NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(64) NOT NULL,
-  `symbol` varchar(100) DEFAULT NULL,
-  `image` varchar(100) DEFAULT NULL,
+  `symbol` varchar(100),
+  `image` varchar(100),
   PRIMARY KEY (`id`),
   UNIQUE KEY `title` (`title`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -2008,8 +2009,8 @@ CREATE TABLE `webview_songtype` (
   `description` longtext NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(64) NOT NULL,
-  `symbol` varchar(100) DEFAULT NULL,
-  `image` varchar(100) DEFAULT NULL,
+  `symbol` varchar(100),
+  `image` varchar(100),
   PRIMARY KEY (`id`),
   UNIQUE KEY `title` (`title`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -2098,7 +2099,7 @@ CREATE TABLE `webview_theme` (
   `title` varchar(20) NOT NULL,
   `default` tinyint(1) NOT NULL,
   `active` tinyint(1) NOT NULL,
-  `creator_id` int(11) DEFAULT NULL,
+  `creator_id` int(11),
   PRIMARY KEY (`id`),
   KEY `webview_theme_f97a5119` (`creator_id`),
   CONSTRAINT `creator_id_refs_id_7635510a` FOREIGN KEY (`creator_id`) REFERENCES `auth_user` (`id`)
@@ -2159,16 +2160,16 @@ CREATE TABLE `webview_userprofile` (
   `token` varchar(32) NOT NULL,
   `user_id` int(11) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `avatar` varchar(100) DEFAULT NULL,
+  `avatar` varchar(100),
   `infoline` varchar(50) NOT NULL,
   `visible_to` varchar(1) NOT NULL,
   `email_on_pm` tinyint(1) NOT NULL,
   `pm_accepted_upload` tinyint(1) NOT NULL,
   `paginate_favorites` tinyint(1) NOT NULL,
-  `last_activity` datetime DEFAULT NULL,
-  `theme_id` int(11) DEFAULT NULL,
+  `last_activity` datetime,
+  `theme_id` int(11),
   `custom_css` varchar(200) NOT NULL,
-  `fave_id` int(11) DEFAULT NULL,
+  `fave_id` int(11),
   `email_on_artist_comment` tinyint(1) NOT NULL,
   `location` varchar(40) NOT NULL,
   `email_on_group_add` tinyint(1) NOT NULL,
@@ -2177,7 +2178,7 @@ CREATE TABLE `webview_userprofile` (
   `icq_id` varchar(40) NOT NULL,
   `yahoo_id` varchar(40) NOT NULL,
   `aol_id` varchar(40) NOT NULL,
-  `hol_id` int(11) DEFAULT NULL,
+  `hol_id` int(11),
   `twitter_id` varchar(32) NOT NULL,
   `use_tags` tinyint(1) NOT NULL,
   `last_changed` datetime NOT NULL,
@@ -2193,7 +2194,7 @@ CREATE TABLE `webview_userprofile` (
   CONSTRAINT `group_id_refs_id_1472a7e8` FOREIGN KEY (`group_id`) REFERENCES `webview_group` (`id`),
   CONSTRAINT `theme_id_refs_id_b2411a` FOREIGN KEY (`theme_id`) REFERENCES `webview_theme` (`id`),
   CONSTRAINT `user_id_refs_id_4b4d0679` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2202,7 +2203,7 @@ CREATE TABLE `webview_userprofile` (
 
 LOCK TABLES `webview_userprofile` WRITE;
 /*!40000 ALTER TABLE `webview_userprofile` DISABLE KEYS */;
-INSERT INTO `webview_userprofile` VALUES ('',NULL,NULL,'','','',2,1,'','','A',1,1,1,NULL,NULL,'',NULL,1,'',1,1,'','','','',NULL,'',1,'2017-05-23 13:19:21',1,1,'',0);
+INSERT INTO `webview_userprofile` VALUES ('',NULL,NULL,'','nectaflag','',1,1,'','das admin','A',0,1,1,'2017-05-23 19:16:20',NULL,'',NULL,0,'',0,0,'','','','',NULL,'',1,'2017-05-23 19:16:20',1,1,'10.0.2.2',0),('',NULL,NULL,'','','',2,2,'','','N',0,0,0,NULL,NULL,'',NULL,0,'',0,0,'','','','',NULL,'',0,'2017-05-23 19:18:16',0,0,'',0);
 /*!40000 ALTER TABLE `webview_userprofile` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -2215,4 +2216,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-23 13:19:56
+-- Dump completed on 2017-05-23 19:18:42

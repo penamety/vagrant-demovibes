@@ -127,7 +127,7 @@ CREATE TABLE `auth_user` (
 
 LOCK TABLES `auth_user` WRITE;
 /*!40000 ALTER TABLE `auth_user` DISABLE KEYS */;
-INSERT INTO `auth_user` VALUES (1,'admin','','','admin@localhost','pbkdf2_sha256$10000$m9iX6mod8vXt$pkQjIzWaSCtHTPGrCAh5XfehAe+W0WiCmMKx8aRTWsI=',1,1,1,'2017-05-23 12:40:26','2017-05-23 12:40:26'),(2,'djrandom','','','djrandom@local.host','pbkdf2_sha256$10000$RfvEyPYAEDjJ$7h8QbDi9t3x88xrPOzy85m2KnkYV6oiKiz3LrBauL/E=',1,1,1,'2017-05-23 19:17:26','2017-05-23 19:17:26');
+INSERT INTO `auth_user` VALUES (1,'admin','','','admin@localhost','pbkdf2_sha256$10000$m9iX6mod8vXt$pkQjIzWaSCtHTPGrCAh5XfehAe+W0WiCmMKx8aRTWsI=',1,1,1,'2017-05-23 12:40:26','2017-05-23 12:40:26'),(2,'djrandom','','','djrandom@localhost','pbkdf2_sha256$10000$RfvEyPYAEDjJ$7h8QbDi9t3x88xrPOzy85m2KnkYV6oiKiz3LrBauL/E=',1,1,1,'2017-05-23 19:17:26','2017-05-23 19:17:26');
 /*!40000 ALTER TABLE `auth_user` ENABLE KEYS */;
 UNLOCK TABLES;
 

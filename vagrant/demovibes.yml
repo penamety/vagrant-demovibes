@@ -64,23 +64,12 @@
         owner: vagrant
         group: vagrant
       with_items:
-        - { src: "/vagrant/conf/demosauce/demosauce.conf", dest: "/home/vagrant/demosauce/demosauce.conf" }
-    - name: link demosauce & dscan & libs
-      file:
-        src: "{{ item.src }}"
-        dest: "{{ item.dest }}"
-        state: link
-        owner: vagrant
-        group: vagrant
-      with_items:
-        - { src: "/home/vagrant/src/demosauce/dscan", dest: "/home/vagrant/demosauce/dscan" }
-        - { src: "/home/vagrant/src/demosauce/demosauce", dest: "/home/vagrant/demosauce/demosauce" }
-        - { src: "/home/vagrant/src/demosauce/libs", dest: "/home/vagrant/demosauce/libs" }
+        - { src: "/vagrant/conf/demosauce/demosauce.conf", dest: "/home/vagrant/src/demosauce/demosauce.conf" }
     - name: copy the compat scan script
       copy:
         remote_src: true
         src: /home/vagrant/src/demosauce/contrib/scan
-        dest: /home/vagrant/demosauce/scan
+        dest: /home/vagrant/src/demosauce/scan
         mode: 0755
         owner: vagrant
         group: vagrant

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-RUNPATH="/home/vagrant/demosauce"
+RUNPATH="/home/vagrant/src/demosauce"
 LOGPATH="/home/vagrant/logs"
 
 cd ${RUNPATH}

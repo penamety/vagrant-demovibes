@@ -12,7 +12,7 @@ DEBUG = True
 TEMPLATE_DEBUG = True
 
 DEBUGLEVEL = 2
-DEBUGFILE = "/tmp/django-error.log"
+DEBUGFILE = "/home/vagrant/logs/django-error.log"
 
 SOUTH_DATABASE_ADAPTERS = {
     'default': "south.db.mysql"
@@ -55,12 +55,12 @@ FILE_UPLOAD_PERMISSIONS = 0644
 ADMIN_NOTIFY_ON_NEW_USER = 0
 USER_SEND_CONF_OK = 1
 
-ARTIST_AUTO_APPROVE_UPLOADS = False
+ARTIST_AUTO_APPROVE_UPLOADS = True
 
 TAG_CLOUD_MIN_COUNT = 2
 
 UWSGI_EVENT_SERVER = ("127.0.0.1", 3032)
-UWSGI_EVENT_SERVER_HTTP = "http://demovibes/demovibes/ajax/monitor/new/"
+UWSGI_EVENT_SERVER_HTTP = "http://localhost:8080/demovibes/ajax/monitor/new/"
 
 MAX_ONELINER_LENGTH = 256
 
@@ -141,7 +141,7 @@ NGINX = {
 
 SESSION_COOKIE_SECURE = True
 
-OPENID_BASE_URI = "http://demovibes"
+OPENID_BASE_URI = "http://localhost:8080"
 
 import datetime
 NEW_USER_MUTE_TIME = datetime.timedelta(minutes=10)

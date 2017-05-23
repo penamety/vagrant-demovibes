@@ -139,7 +139,7 @@ NGINX = {
     "memcached" : True,
 }
 
-SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = False
 
 OPENID_BASE_URI = "http://localhost:8080"
 

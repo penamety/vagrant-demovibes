@@ -77,7 +77,7 @@ DROP TABLE IF EXISTS `auth_permission`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `auth_permission` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL,
+  `name` varchar(255) NOT NULL,
   `content_type_id` int(11) NOT NULL,
   `codename` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
@@ -109,12 +109,12 @@ CREATE TABLE `auth_user` (
   `username` varchar(30) NOT NULL,
   `first_name` varchar(30) NOT NULL,
   `last_name` varchar(30) NOT NULL,
-  `email` varchar(75) NOT NULL,
+  `email` varchar(254) NOT NULL,
   `password` varchar(128) NOT NULL,
   `is_staff` tinyint(1) NOT NULL,
   `is_active` tinyint(1) NOT NULL,
   `is_superuser` tinyint(1) NOT NULL,
-  `last_login` datetime NOT NULL,
+  `last_login` datetime DEFAULT NULL,
   `date_joined` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
@@ -310,7 +310,6 @@ DROP TABLE IF EXISTS `django_content_type`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `django_content_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
   `app_label` varchar(100) NOT NULL,
   `model` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
@@ -324,8 +323,34 @@ CREATE TABLE `django_content_type` (
 
 LOCK TABLES `django_content_type` WRITE;
 /*!40000 ALTER TABLE `django_content_type` DISABLE KEYS */;
-INSERT INTO `django_content_type` VALUES (1,'permission','auth','permission'),(2,'group','auth','group'),(3,'user','auth','user'),(4,'content type','contenttypes','contenttype'),(5,'session','sessions','session'),(6,'site','sites','site'),(7,'log entry','admin','logentry'),(8,'migration history','south','migrationhistory'),(9,'tag','tagging','tag'),(10,'tagged item','tagging','taggeditem'),(11,'nonce','django_authopenid','nonce'),(12,'association','django_authopenid','association'),(13,'user association','django_authopenid','userassociation'),(14,'group','webview','group'),(15,'generic base link','webview','genericbaselink'),(16,'generic link','webview','genericlink'),(17,'group vote','webview','groupvote'),(18,'theme','webview','theme'),(19,'userprofile','webview','userprofile'),(20,'label','webview','label'),(21,'artist','webview','artist'),(22,'artist vote','webview','artistvote'),(23,'song type','webview','songtype'),(24,'song platform','webview','songplatform'),(25,'logo','webview','logo'),(26,'screenshot','webview','screenshot'),(27,'screenshot object link','webview','screenshotobjectlink'),(28,'song meta data','webview','songmetadata'),(29,'object log','webview','objectlog'),(30,'song','webview','song'),(31,'tag history','webview','taghistory'),(32,'song vote','webview','songvote'),(33,'compilation','webview','compilation'),(34,'compilation song list','webview','compilationsonglist'),(35,'compilation vote','webview','compilationvote'),(36,'song approvals','webview','songapprovals'),(37,'song download','webview','songdownload'),(38,'queue','webview','queue'),(39,'song comment','webview','songcomment'),(40,'favorite','webview','favorite'),(41,'oneliner muted','webview','onelinermuted'),(42,'oneliner','webview','oneliner'),(43,'ajax event','webview','ajaxevent'),(44,'news','webview','news'),(45,'radio stream','webview','radiostream'),(46,'private message','webview','privatemessage'),(47,'upload ticket','webview','uploadticket'),(48,'country list','webview','countrylist'),(49,'Link Category','webview','linkcategory'),(50,'link','webview','link'),(51,'FAQ','webview','faq'),(52,'song license','webview','songlicense'),(53,'registration profile','registration','registrationprofile'),(54,'Forum','forum','forum'),(55,'Thread','forum','thread'),(56,'Forum Post','forum','post'),(57,'Subscription','forum','subscription'),(58,'OpenID','openid_provider','openid'),(59,'trusted root','openid_provider','trustedroot');
+INSERT INTO `django_content_type` VALUES (7,'admin','logentry'),(2,'auth','group'),(1,'auth','permission'),(3,'auth','user'),(4,'contenttypes','contenttype'),(12,'django_authopenid','association'),(11,'django_authopenid','nonce'),(13,'django_authopenid','userassociation'),(54,'forum','forum'),(56,'forum','post'),(57,'forum','subscription'),(55,'forum','thread'),(58,'openid_provider','openid'),(59,'openid_provider','trustedroot'),(53,'registration','registrationprofile'),(5,'sessions','session'),(6,'sites','site'),(8,'south','migrationhistory'),(9,'tagging','tag'),(10,'tagging','taggeditem'),(43,'webview','ajaxevent'),(21,'webview','artist'),(22,'webview','artistvote'),(33,'webview','compilation'),(34,'webview','compilationsonglist'),(35,'webview','compilationvote'),(48,'webview','countrylist'),(51,'webview','faq'),(40,'webview','favorite'),(15,'webview','genericbaselink'),(16,'webview','genericlink'),(14,'webview','group'),(17,'webview','groupvote'),(20,'webview','label'),(50,'webview','link'),(49,'webview','linkcategory'),(25,'webview','logo'),(44,'webview','news'),(29,'webview','objectlog'),(42,'webview','oneliner'),(41,'webview','onelinermuted'),(46,'webview','privatemessage'),(38,'webview','queue'),(45,'webview','radiostream'),(26,'webview','screenshot'),(27,'webview','screenshotobjectlink'),(30,'webview','song'),(36,'webview','songapprovals'),(39,'webview','songcomment'),(37,'webview','songdownload'),(52,'webview','songlicense'),(28,'webview','songmetadata'),(24,'webview','songplatform'),(23,'webview','songtype'),(32,'webview','songvote'),(31,'webview','taghistory'),(18,'webview','theme'),(47,'webview','uploadticket'),(19,'webview','userprofile');
 /*!40000 ALTER TABLE `django_content_type` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `django_migrations`
+--
+
+DROP TABLE IF EXISTS `django_migrations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `django_migrations` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `app` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `applied` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `django_migrations`
+--
+
+LOCK TABLES `django_migrations` WRITE;
+/*!40000 ALTER TABLE `django_migrations` DISABLE KEYS */;
+INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2017-05-25 10:26:26'),(2,'auth','0001_initial','2017-05-25 10:26:26'),(3,'admin','0001_initial','2017-05-25 10:26:26'),(4,'contenttypes','0002_remove_content_type_name','2017-05-25 10:26:26'),(5,'auth','0002_alter_permission_name_max_length','2017-05-25 10:26:26'),(6,'auth','0003_alter_user_email_max_length','2017-05-25 10:26:26'),(7,'auth','0004_alter_user_username_opts','2017-05-25 10:26:26'),(8,'auth','0005_alter_user_last_login_null','2017-05-25 10:26:26'),(9,'auth','0006_require_contenttypes_0002','2017-05-25 10:26:26'),(10,'forum','0001_initial','2017-05-25 10:26:26'),(11,'openid_provider','0001_initial','2017-05-25 10:26:26'),(12,'registration','0001_initial','2017-05-25 10:26:26'),(13,'sessions','0001_initial','2017-05-25 10:26:26'),(14,'sites','0001_initial','2017-05-25 10:26:26'),(15,'tagging','0001_initial','2017-05-25 10:26:26'),(16,'tagging','0002_on_delete','2017-05-25 10:26:26'),(17,'webview','0001_initial','2017-05-25 10:26:30');
+/*!40000 ALTER TABLE `django_migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -649,8 +674,8 @@ CREATE TABLE `tagging_taggeditem` (
   KEY `tagging_taggeditem_3747b463` (`tag_id`),
   KEY `tagging_taggeditem_e4470c6e` (`content_type_id`),
   KEY `tagging_taggeditem_829e37fd` (`object_id`),
-  CONSTRAINT `content_type_id_refs_id_f1f84eed` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
-  CONSTRAINT `tag_id_refs_id_9f51000d` FOREIGN KEY (`tag_id`) REFERENCES `tagging_tag` (`id`)
+  CONSTRAINT `tagging_taggeditem_tag_id_7c6426178988e7e_fk_tagging_tag_id` FOREIGN KEY (`tag_id`) REFERENCES `tagging_tag` (`id`),
+  CONSTRAINT `taggi_content_type_id_716a325781ea128d_fk_django_content_type_id` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -2225,4 +2250,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-23 19:58:24
+-- Dump completed on 2017-05-25 10:27:28

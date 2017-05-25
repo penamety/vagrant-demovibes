@@ -152,11 +152,11 @@
         target: /vagrant/demovibes.sql
     - name: validate db
       become_user: vagrant
-      shell: ". /home/vagrant/pyenv/bin/activate && ./manage.py syncdb --migrate && touch syncdb.lock"
+      shell: ". /home/vagrant/pyenv/bin/activate && ./manage.py syncdb && touch syncdb.lock"
       args:
-        chdir: /home/vagrant/demovibes/demovibes
+        chdir: /home/vagrant/demovibes
         executable: /bin/bash
-        creates: /home/vagrant/demovibes/demovibes/syncdb.lock
+        creates: /home/vagrant/demovibes/syncdb.lock
 #    - name: import music
 #      become_user: vagrant
 #      shell: ". /home/vagrant/pyenv/bin/activate && chmod 755 pyImportMp3.py && /vagrant/scripts/import_music.sh"

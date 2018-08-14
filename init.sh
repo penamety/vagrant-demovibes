@@ -2,7 +2,7 @@
 
 if [ ! -d demovibes ]; then
   echo "Cloning the repository"
-  git clone https://github.com/arabek/demovibes demovibes
+  git clone https://github.com/penamety/demovibes demovibes
   echo "Done."
 else
   echo "Repository already cloned, maybe you want to git pull instead?"

@@ -8,17 +8,17 @@ CPPFLAGS=
 LDFLAGS=
 
 # remove old output files
-rm -f config.mk
+rm -f makefile.conf config.mk
 
 have_lib() {
-    echo -n "checking for $1 ... "
+    printf "checking for $1 ... "
     pkg-config "--exists" $1 2>/dev/null
     test $? -ne 0 && echo "no" && return 1
     echo "yes" && return 0
 }
 
 have_header() {
-    echo -n "checking for $1 ... "
+    printf "checking for $1 ... "
     echo "#include <$1>" | $CC $CFLAGS -E -xc -o /dev/null - 2>/dev/null
     test $? -ne 0 && echo "no" && return 1
     echo "yes" && return 0
@@ -40,13 +40,13 @@ assert_version() {
 }
 
 have_file() {
-    echo -n "checking for $1 ... "
+    printf "checking for $1 ... "
     test -e "$1" && echo "yes" && return 0
     echo "no" && return 1
 }
 
 have_exe() {
-    echo -n "checking for $1 ... "
+    printf "checking for $1 ... "
     which $1 >/dev/null 2>/dev/null
     test $? -ne 0 && echo "no" && return 1
     echo "yes" && return 0
@@ -58,7 +58,7 @@ assert_exe() {
 }
 
 have_cpuflag() {
-    echo -n "checking for $1 ... "
+    printf "checking for $1 ... "
     grep -q $1 "/proc/cpuinfo" 2>/dev/null
     test $? -ne 0 && echo "no" && return 1
     echo "yes" && return 0
@@ -72,15 +72,6 @@ ask() {
             N|n) return 1;;
         esac
     done
-}
-
-run_script() {
-    old_dir=`pwd`
-    test -n "$2" && cd $2
-    ./$1
-    result=$?
-    cd $old_dir
-    return $result
 }
 
 # in case there is local stuff
@@ -114,7 +105,7 @@ cd -
 have_exe "git" && have_file ".git" && CPPFLAGS="$CPPFLAGS -DBUILD_ID=\$(shell git describe --always)"
 
 # generate makefile
-cat <<EOF >config.mk
+cat <<EOF >makefile.conf
 CC            = $CC
 CFLAGS        = -ffast-math -O2
 CPPFLAGS      = $CPPFLAGS
@@ -124,4 +115,5 @@ DSCAN_SRC     = $INPUT
 LIBS          = $LIBS
 EOF
 
-echo "smooth operator"
+echo "done."
+echo "run 'make clobber' to rebuild libraries."

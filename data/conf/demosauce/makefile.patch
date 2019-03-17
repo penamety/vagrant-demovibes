@@ -1,0 +1,13 @@
+diff --git a/makefile b/makefile
+index 4f7b69c..0a87072 100644
+--- a/makefile
++++ b/makefile
+@@ -10,7 +10,7 @@ vpath %.so libs
+ PKG_LIBS  = libavcodec libavformat libavutil libswresample vorbisfile
+ CPPFLAGS += -Ilibs/replaygain -Ilibs/bass -Ilibs/openmpt -Ilibs/hively
+ CFLAGS   += -std=c11 -pthread $(shell pkg-config --cflags $(PKG_LIBS))
+-LDFLAGS  += -Llibs -lm -lz -lopenmpt -lhively $(shell pkg-config --libs $(PKG_LIBS))
++LDFLAGS  += -Llibs -lm -lz -lpthread -lopenmpt -lhively $(shell pkg-config --libs $(PKG_LIBS))
+ LIBS	 += libreplaygain.a libopenmpt.a libhively.a
+ 
+ DEMOSAUCE_SRC  += demosauce.c cast.c decoder.c ffdecoder.c omptdecoder.c hvldecoder.c log.c settings.c stream.c util.c
